@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NewsArticle } from "../types/news";
 
 interface NewsCardProps {
@@ -6,6 +6,10 @@ interface NewsCardProps {
 }
 
 const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
+  const [imgError, setImgError] = useState(false);
+  const DEFAULT_IMAGE_URL =
+    "https://placehold.co/400x200/e2e8f0/1e293b?text=No+Image+Available";
+
   const timeAgo = (date: string) => {
     const now = new Date();
     const publishedDate = new Date(date);
@@ -29,16 +33,15 @@ const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-colors duration-150 flex flex-col h-full">
-      {article.imageUrl && (
-        <div className="relative w-full aspect-video overflow-hidden">
-          <img
-            src={article.imageUrl}
-            alt={article.title}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      )}
+      <div className="relative w-full aspect-video overflow-hidden">
+        <img
+          src={imgError ? DEFAULT_IMAGE_URL : article.imageUrl}
+          alt={article.title}
+          className="w-full h-full object-cover"
+          loading="lazy"
+          onError={() => setImgError(true)}
+        />
+      </div>
       <div className="p-4 flex-1 flex flex-col">
         <div className="flex flex-wrap items-center justify-between mb-2 gap-2">
           <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
