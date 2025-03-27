@@ -76,6 +76,24 @@ npm run build
 
 ## Docker Deployment
 
+### Option 1: Using Docker Compose
+
+1. Make sure Docker and Docker Compose are installed on your system.
+
+2. Run the application with docker-compose:
+
+```bash
+docker-compose up -d
+```
+
+3. To stop the application:
+
+```bash
+docker-compose down
+```
+
+### Option 2: Using Docker directly
+
 1. Build the Docker image:
 
 ```bash
@@ -89,6 +107,10 @@ docker run -p 80:80 news-aggregator
 ```
 
 The application will be available at `http://localhost:80`
+
+### Note on Environment Variables
+
+When using Docker, the environment variables from your `.env` file are baked into the application during the build process. If you need to change these values, you'll need to rebuild the Docker image.
 
 ## Project Structure
 
