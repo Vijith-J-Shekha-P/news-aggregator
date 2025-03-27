@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    # Environment variables can be passed directly
+    # environment:
+    #   - VITE_NEWS_API_KEY=${VITE_NEWS_API_KEY}
+    #   - VITE_GUARDIAN_API_KEY=${VITE_GUARDIAN_API_KEY}
+    #   - VITE_NY_TIMES_API_KEY=${VITE_NY_TIMES_API_KEY}
+    # Note: For Vite, environment variables are embedded at build time,
+    # so passing them at runtime won't work unless special handling is added
